@@ -8,10 +8,11 @@ public interface IBaseActivity {
 
 	/**
 	 * 绑定渲染视图的布局文件
-	 * 
-	 * @return 布局文件资源id
+	 *
+	 * 注：此处由于使用Data Binding将之前
+	 * @return 布局文件资源id改为void
 	 */
-	int bindLayout();
+	void bindLayout();
 
 	/**
 	 * 初始化视图

@@ -24,29 +24,48 @@ import java.lang.ref.WeakReference;
  */
 
 public abstract class BaseActivity extends FragmentActivity implements IBaseActivity, OnClickListener {
-    /*** 整个应用Applicaiton **/
+    /***
+     * 整个应用Applicaiton
+     **/
     private BaseApplication mApplication = null;
-    /** 当前Activity的弱引用，防止内存泄露 **/
+    /**
+     * 当前Activity的弱引用，防止内存泄露
+     **/
     private WeakReference<Activity> context = null;
-    /** 日志输出标志 **/
+    /**
+     * 日志输出标志
+     **/
     protected final String TAG = getClass().getSimpleName();
     protected InputMethodManager iMManager;
-    /** 标题容器 */
+    /**
+     * 标题容器
+     */
     protected RelativeLayout rl_title_bar_container;
-    /** 横线 */
+    /**
+     * 横线
+     */
     protected View iv_title_bar_btom_div;
-    /** 返回键 */
+    /**
+     * 返回键
+     */
     protected TextView tv_title_bar_left;
-    /** 标题 */
+    /**
+     * 标题
+     */
     protected TextView tv_title_bar_title;
-    /** 小标题 */
+    /**
+     * 小标题
+     */
     protected TextView tv_title_bar_little_titile;
-    /** 中间内容 */
+    /**
+     * 中间内容
+     */
     protected LinearLayout ll_base_container;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(bindLayout());
+        bindLayout();
         // 将当前Activity压入栈
         mApplication = BaseApplication.getInstance();
         context = new WeakReference<Activity>(this);
@@ -56,6 +75,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         setListener();
         doBusiness();
     }
+
     private void initBaseView() {
         rl_title_bar_container = (RelativeLayout) findViewById(R.id.rl_title_bar_container);
         iv_title_bar_btom_div = (View) findViewById(R.id.iv_title_bar_btom_div);
@@ -64,6 +84,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         tv_title_bar_little_titile = (TextView) findViewById(R.id.tv_title_bar_little_titile);
         ll_base_container = (LinearLayout) findViewById(R.id.ll_base_container);
     }
+
     /**
      * 设置内容View
      *
@@ -73,6 +94,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         // 把布局添加到ll_base_container 返回的View是ll_base_container
         LayoutInflater.from(getActivity()).inflate(layoutId, ll_base_container, true);
     }
+
     /**
      * 设置页面标题
      *
@@ -92,9 +114,9 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         if (tv_title_bar_title != null)
             tv_title_bar_title.setTextColor(colorId);
     }
+
     /**
      * 设置返回页面图标
-     *
      */
     protected void setGoBackImg() {
         Drawable drawableLeft = getResources().getDrawable(R.mipmap.icon_back);
@@ -102,6 +124,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         if (tv_title_bar_left != null)
             tv_title_bar_left.setCompoundDrawables(drawableLeft, null, null, null);
     }
+
     /**
      * 设置返回按钮点击事件——finish()
      */
@@ -127,6 +150,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         }
 
     }
+
     /**
      * 设置小标题
      */
@@ -136,12 +160,14 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         }
 
     }
+
     /**
      * 设置标题分割线隐藏
      */
     protected void setTitleContainerBackgroundGone() {
         iv_title_bar_btom_div.setVisibility(View.GONE);
     }
+
     /**
      * 隐藏输入法软键盘
      */
@@ -158,6 +184,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
             }
         }
     }
+
     /**
      * 获取当前Activity
      *
@@ -169,6 +196,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         else
             return null;
     }
+
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
@@ -188,6 +216,7 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         hideSoftInputFromWindow();
         overridePendingTransition(R.anim.activity_left_in, R.anim.activity_left_out);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
