@@ -10,7 +10,7 @@ public class ConstantManager {
      * 0为生产模式 ,其他为调试模式
      * 发版时改为0
      */
-    public static  int RELEASE_MODE = 0;
+    public static  int RELEASE_MODE = 1;
     /** 值为0时关闭所有级别的日志打印 */
     public static int LOG_LEVEL = 5;
     /** ListView 初始数据 默认显示的个数 =20 */
