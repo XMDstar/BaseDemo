@@ -73,7 +73,11 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         initBaseView();
         initView();
         setListener();
-        doBusiness();
+        try {
+            doBusiness();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initBaseView() {

@@ -27,6 +27,6 @@ public interface IBaseActivity {
 	/**
 	 * 业务处理操作（onCreate方法中调用）
 	 */
-	void doBusiness();
+	void doBusiness() throws Exception;
 
 }
