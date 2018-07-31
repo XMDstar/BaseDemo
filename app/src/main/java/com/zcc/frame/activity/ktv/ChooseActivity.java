@@ -10,7 +10,7 @@ import com.zcc.frame.R;
 import com.zcc.frame.base.BaseActivity;
 import com.zcc.frame.tools.Toaster;
 
-public class ChooseActivity extends BaseActivity {
+ public class ChooseActivity extends BaseActivity {
     private TextView mTvName;
     private Button mBtnGuest;
     private Button mBtnHost;
