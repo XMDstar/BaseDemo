@@ -6,4 +6,10 @@
     <color name="black">#000000</color>
     <color name="line_bg">#cccccc</color>
     <color name="white">#ffffff</color>
+    //video
+    <color name="dacne_identify_line">#eb413e</color>
+    <color name="biz_audio_progress_bg">#00b2ff</color>
+    <color name="biz_audio_progress_first">#99eb413e</color>
+    <color name="biz_audio_progress_second">#6b6666</color>
+    <color name="transparent">#00000000</color>
 </resources>

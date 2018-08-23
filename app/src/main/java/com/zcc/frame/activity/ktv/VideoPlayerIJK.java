@@ -1,6 +1,7 @@
 package com.zcc.frame.activity.ktv;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -123,7 +124,7 @@ public class VideoPlayerIJK extends FrameLayout {
         }
         //给mediaPlayer设置视图
         mMediaPlayer.setDisplay(surfaceView.getHolder());
-
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_VOICE_CALL);
         mMediaPlayer.prepareAsync();
     }
 

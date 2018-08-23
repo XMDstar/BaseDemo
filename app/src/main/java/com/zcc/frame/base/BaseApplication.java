@@ -2,7 +2,10 @@ package com.zcc.frame.base;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.zcc.frame.tools.Toaster;
 
 import java.lang.ref.WeakReference;
@@ -14,6 +17,7 @@ import java.util.Stack;
 
 public class BaseApplication extends Application {
     private static BaseApplication instance = null;
+    private RefWatcher refWatcher;
     /***
      * 寄存整个应用Activity
      **/
@@ -24,9 +28,12 @@ public class BaseApplication extends Application {
         super.onCreate();
         instance = this;
         Toaster.init(instance);
-
+        // LeakCanary  init
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
-
     public static BaseApplication getInstance() {
         return instance;
     }

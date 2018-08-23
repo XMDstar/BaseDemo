@@ -144,7 +144,7 @@ public class KtvActivity extends BaseActivity {
     }
 
     @Override
-    public void doBusiness() throws Exception {
+    public void doBusiness(){
         title = getIntent().getStringExtra("title");
         type = getIntent().getIntExtra("type", 0);
         LogManager.e("title====================================="+title);
