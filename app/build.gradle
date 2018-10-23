@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 //apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.zcc.frame"
         minSdkVersion 21
@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true}}
     }
     //dataBinding减少findbyid
     dataBinding {
@@ -30,7 +31,11 @@ android {
 //        schemaVersion 1
 //        targetGenDir 'src/main/java'
 //    }
-
+//    javaCompileOptions {
+//        annotationProcessorOptions {
+//            arguments = [eventBusIndex: "com.xiazdong.eventbusdemo.EventBusIndex"]   //生成的索引文件名
+//        }
+//    }
 }
 
 dependencies {
@@ -77,4 +82,10 @@ dependencies {
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:1.5.4"
     //GreenDao start
 //    compile 'org.greenrobot:greendao:3.1.0'
+
+    //eventbus
+    compile 'org.greenrobot:eventbus:3.1.1'
+//    annotationProcessor  'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    //图片加载
+//    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }

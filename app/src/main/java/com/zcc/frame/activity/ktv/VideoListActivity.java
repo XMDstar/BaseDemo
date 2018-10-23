@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -21,14 +22,22 @@ import com.zcc.frame.R;
 import com.zcc.frame.base.BaseActivity;
 import com.zcc.frame.callback.StateCallBack;
 import com.zcc.frame.common.LogManager;
+import com.zcc.frame.tools.Toaster;
+import com.zcc.frame.tools.event.EventCode;
+import com.zcc.frame.tools.event.MessageEvent;
+import com.zcc.frame.tools.event.annotation.BindEventBus;
 import com.zcc.frame.view.MeasuringListview;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
+@BindEventBus
 public class VideoListActivity extends BaseActivity {
 
     @InjectView(R.id.lv_video)
@@ -37,7 +46,7 @@ public class VideoListActivity extends BaseActivity {
     private MyAdapter adapter;
     private LinearLayoutManager mLayoutManager;
     int playPosition = 0;
-
+    VideoPlayerIJK play;
     @Override
     public void onClick(View v) {
 
@@ -65,73 +74,80 @@ public class VideoListActivity extends BaseActivity {
 
     @Override
     public void setListener() {
-
     }
 
     @Override
     public void doBusiness() {
-
-        lvVideo.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                recyclerView.getBaseline();
-                //direction为 -1 表示手指向下滑动（屏幕向上滑动）， 1 表示手指向上滑动（屏幕向下滑动）。
-                if (mLayoutManager != null) {
-                    int firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();//得到显示屏内的第一个list的位置数position
-                    View firstView = mLayoutManager.findViewByPosition(firstVisibleItem);
-
-                    if (null != firstView) {
-                        if (dy > 0) {
-
-
-                            if (firstView.getHeight() + firstView.getTop() <= firstView.getHeight() / 3) {
-                                //video stop or play second
-                                if (mLayoutManager.getChildCount() < 2) {
-                                    return;
-                                }
-                                if (playPosition == firstVisibleItem + 1) {
-                                    return;
-                                }
-                                playPosition = firstVisibleItem + 1;
-                                adapter.setPlay(playPosition);
-                            } else {
-                                if (playPosition == firstVisibleItem) {
-                                    return;
-                                }
-                                playPosition = firstVisibleItem;
-                                adapter.setPlay(playPosition);
-                            }
-
-                        }
-                        if (dy < 0) {
-                                if (firstView.getHeight() + firstView.getTop() >= firstView.getHeight() * 2 / 3) {
-                                    //video stop or play second
-                                    if (mLayoutManager.getChildCount() < 2) {
-                                        return;
-                                    }
-                                    if (playPosition == firstVisibleItem) {
-                                        return;
-                                    }
-                                    playPosition = firstVisibleItem;
-                                    adapter.setPlay(playPosition);
-                                } else {
-                                    if (playPosition == firstVisibleItem + 1) {
-                                        return;
-                                    }
-                                    playPosition = firstVisibleItem + 1;
-                                    adapter.setPlay(playPosition);
-                                }
-                        }
-                    }
-                }
-            }
-        });
+        EventBus.getDefault().post(new MessageEvent(1,"succeed"));
+//        lvVideo.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                recyclerView.getBaseline();
+//                //direction为 -1 表示手指向下滑动（屏幕向上滑动）， 1 表示手指向上滑动（屏幕向下滑动）。
+//                if (mLayoutManager != null) {
+//                    int firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();//得到显示屏内的第一个list的位置数position
+//                    View firstView = mLayoutManager.findViewByPosition(firstVisibleItem);
+////                    View view=mLayoutManager.getChildAt(firstVisibleItem);
+//
+//                    if (null != firstView) {
+//                        if (dy > 0) {
+//                            if (firstView.getHeight() + firstView.getTop() <= firstView.getHeight() / 3) {
+//                                //video stop or play second
+//                                if (mLayoutManager.getChildCount() < 2) {
+//                                    return;
+//                                }
+//                                if (playPosition == firstVisibleItem + 1) {
+//                                    return;
+//                                }
+//                                playPosition = firstVisibleItem + 1;
+//                                adapter.setPlay(playPosition);
+//                                //adapter.notifyDataSetChanged();
+//                                adapter.notifyItemChanged(playPosition);
+//                            } else {
+//                                if (playPosition == firstVisibleItem) {
+//                                    return;
+//                                }
+//                                playPosition = firstVisibleItem;
+////                                adapter.setPlay(playPosition);
+//                                View view=mLayoutManager.findViewByPosition(playPosition);
+//                                FrameLayout fl= (FrameLayout) view.findViewById(R.id.fl);
+//
+//                                play=new VideoPlayerIJK(VideoListActivity.this);
+//                                play.setVideoPath(data.get(0));
+//                                fl.addView(play);
+//
+//                            }
+//
+//                        }
+//                        if (dy < 0) {
+//                                if (firstView.getHeight() + firstView.getTop() >= firstView.getHeight() * 2 / 3) {
+//                                    //video stop or play second
+//                                    if (mLayoutManager.getChildCount() < 2) {
+//                                        return;
+//                                    }
+//                                    if (playPosition == firstVisibleItem) {
+//                                        return;
+//                                    }
+//                                    playPosition = firstVisibleItem;
+//                                    adapter.setPlay(playPosition);
+//                                } else {
+//                                    if (playPosition == firstVisibleItem + 1) {
+//                                        return;
+//                                    }
+//                                    playPosition = firstVisibleItem + 1;
+//                                    adapter.setPlay(playPosition);
+//                                }
+//                        }
+//                    }
+//                }
+//            }
+//        });
 
     }
 
@@ -155,20 +171,20 @@ public class VideoListActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(final ViewHolder viewHolder, int position) {
             //将数据填充到具体的view中
-            viewHolder.iv.setVisibility(View.VISIBLE);
-            viewHolder.ijkPlayer.release();
-            if (play == position) {
-                viewHolder.ijkPlayer.setVisibility(View.VISIBLE);
-                viewHolder.ijkPlayer.setVideoPath(data.get(position));
-                viewHolder.iv.setVisibility(View.GONE);
-                LogManager.e("======" + position);
-            } else {
-                viewHolder.iv.setVisibility(View.VISIBLE);
-                viewHolder.ijkPlayer.setVisibility(View.GONE);
-                viewHolder.ijkPlayer.release();
-            }
+//            viewHolder.iv.setVisibility(View.VISIBLE);
+////            viewHolder.ijkPlayer.release();
+//            if (play == position) {
+//                viewHolder.ijkPlayer.setVisibility(View.VISIBLE);
+//                viewHolder.ijkPlayer.setVideoPath(data.get(position));
+//                viewHolder.iv.setVisibility(View.GONE);
+//                LogManager.e("======" + position);
+//            } else {
+//                viewHolder.iv.setVisibility(View.VISIBLE);
+//                viewHolder.ijkPlayer.setVisibility(View.GONE);
+//                viewHolder.ijkPlayer.release();
+//            }
 
-            viewHolder.tv.setText("video" + position);
+//            viewHolder.tv.setText("video" + position);
         }
 
         @Override
@@ -179,14 +195,21 @@ public class VideoListActivity extends BaseActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
             TextView tv;
             ImageView iv;
-            VideoPlayerIJK ijkPlayer;
+//            VideoPlayerIJK ijkPlayer;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                ijkPlayer = (VideoPlayerIJK) itemView.findViewById(R.id.sf_videoview);
-                tv = (TextView) itemView.findViewById(R.id.tv);
-                iv = (ImageView) itemView.findViewById(R.id.iv);
+//                ijkPlayer = (VideoPlayerIJK) itemView.findViewById(R.id.sf_videoview);
+//                tv = (TextView) itemView.findViewById(R.id.tv);
+//                iv = (ImageView) itemView.findViewById(R.id.iv);
             }
+        }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageReceived(MessageEvent event) {
+        if (event != null&&event.getCode()== EventCode.loginSucceed) {
+            Toaster.show("onMessageReceived======"+event.getData());
+            LogManager.e("onMessageReceived======+event.getData()");
         }
     }
 

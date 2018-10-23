@@ -32,12 +32,6 @@ public class PlayVideoActivity extends BaseActivity {
     ImageView mediacontrollerTopBack;
     private IjkMediaPlayer player;
     private VideoPlayerIJK ijkPlayer;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_video);
-        ButterKnife.inject(this);
-    }
 
     @Override
     public void onClick(View v) {
@@ -53,7 +47,8 @@ public class PlayVideoActivity extends BaseActivity {
 
     @Override
     public void bindLayout() {
-
+        setContentView(R.layout.activity_play_video);
+        ButterKnife.inject(this);
     }
 
     @Override
@@ -67,7 +62,6 @@ public class PlayVideoActivity extends BaseActivity {
         }
         player = new IjkMediaPlayer();
         ijkPlayer=sfVideo;
-        //ijkPlayer.s
         ijkPlayer.setListener(new VideoPlayerListener() {
             @Override
             public void onBufferingUpdate(IMediaPlayer mp, int percent) {
@@ -75,8 +69,6 @@ public class PlayVideoActivity extends BaseActivity {
 
             @Override
             public void onCompletion(IMediaPlayer mp) {
-                mp.seekTo(0);
-                mp.start();
             }
 
             @Override
@@ -104,9 +96,11 @@ public class PlayVideoActivity extends BaseActivity {
                 //获取到视频的宽和高
             }
         });
-
+        loadVideo("http://crk.momocdn.com/mv/DD/E6/DDE62798-C8F1-4526-ACC1-E2240328B12E20180406_h264.mp4");
     }
-
+    public void loadVideo(String path) {
+        ijkPlayer.setVideoPath(path);
+    }
     @Override
     public void setListener() {
 
@@ -114,6 +108,11 @@ public class PlayVideoActivity extends BaseActivity {
 
     @Override
     public void doBusiness() {
-
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ijkPlayer.stop();
+        IjkMediaPlayer.native_profileEnd();
     }
 }

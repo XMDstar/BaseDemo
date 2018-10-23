@@ -15,7 +15,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zcc.frame.R;
+import com.zcc.frame.tools.event.annotation.BindEventBus;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.lang.annotation.Annotation;
 import java.lang.ref.WeakReference;
 
 /**
@@ -65,6 +69,9 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (havaAnnotation(BindEventBus.class)) {
+            EventBus.getDefault().register(this);
+        }
         bindLayout();
         // 将当前Activity压入栈
         mApplication = BaseApplication.getInstance();
@@ -75,7 +82,17 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
         setListener();
         doBusiness();
     }
-
+    public boolean havaAnnotation(Class clazz){
+//        if (this.getClass().isAnnotationPresent(BindEventBus.class)) {
+//            return true;
+//        }
+        for (Annotation annotation : this.getClass().getAnnotations()) {
+            if (annotation.annotationType().equals(clazz)) {
+               return true;
+            }
+        }
+        return false;
+    }
     private void initBaseView() {
         rl_title_bar_container = (RelativeLayout) findViewById(R.id.rl_title_bar_container);
         iv_title_bar_btom_div = (View) findViewById(R.id.iv_title_bar_btom_div);
@@ -221,5 +238,8 @@ public abstract class BaseActivity extends FragmentActivity implements IBaseActi
     protected void onDestroy() {
         super.onDestroy();
         mApplication.removeTask(context);
+        if (havaAnnotation(BindEventBus.class)) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 }
