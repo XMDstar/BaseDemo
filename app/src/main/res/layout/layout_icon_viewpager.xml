@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/icon_rl"
+    style="@style/icon_relativeLayout_style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/icon_vp"
+        style="@style/icon_viewpager_style"></android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/icon_ly"
+        style="@style/icon_linearLayout_style"
+        android:layout_below="@id/icon_vp"></LinearLayout>
+</RelativeLayout>
