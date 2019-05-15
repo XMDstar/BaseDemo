@@ -18,11 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.ImageWXActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- <meta-data android:name="com.android.support:design" android:value="25.3.1"/> -->
         <activity android:name=".activity.MainActivity" />
@@ -42,6 +38,13 @@
         <activity
             android:name=".album.AlbumPreviewActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.CreateImageActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

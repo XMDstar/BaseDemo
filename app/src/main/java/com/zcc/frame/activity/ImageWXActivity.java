@@ -12,6 +12,13 @@ import com.zcc.frame.view.DragItemRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @anthor zcc
+ * @time ${DATE} ${TIME}
+ * @class 仿微信发朋友圈图片可拖拽排序
+ */
+
+
 public class ImageWXActivity extends BaseActivity {
     private DragItemRecyclerView recyclerView;
 
