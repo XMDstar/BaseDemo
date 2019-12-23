@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".image.LoaderActivity">
+    <!--底部黑色背景-->
+    <ImageView
+        android:id="@+id/bg_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black" />
+    <!--实现放大镜效果自定义view-->
+    <com.zcc.frame.image.BitmapShaderView
+        android:id="@+id/iv_shader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--收缩人像-->
+    <ImageView
+        android:id="@+id/iv_crcular_reveal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@mipmap/bg_shader" />
+</android.support.constraint.ConstraintLayout>
