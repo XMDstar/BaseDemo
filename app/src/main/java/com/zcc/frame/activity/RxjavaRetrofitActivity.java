@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,15 +17,15 @@ import com.zcc.frame.http.ApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class RxjavaRetrofitActivity extends AppCompatActivity {
-    @InjectView(R.id.rc)
+    @Bind(R.id.rc)
     public RecyclerView rc;
     private List<ScrollActivity.Topic> list;
     private BaseQuickAdapter adapter;
@@ -34,9 +33,8 @@ public class RxjavaRetrofitActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("zcc", "2=======onCreate");
         setContentView(R.layout.activity_rxjava_retrofit);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         list = new ArrayList<>();
         for (int i = 0; i < 50; i++) {
             ScrollActivity.Topic topic = new ScrollActivity.Topic("图片" + i, "https://heras.igengmei.com/banner/2019/04/08/644e91d060");
@@ -84,36 +82,30 @@ public class RxjavaRetrofitActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.e("zcc", "2=======onStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e("zcc", "2=======onResume");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.e("zcc", "2=======onRestart");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e("zcc", "2=======onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.e("zcc", "2=======onStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.e("zcc", "2=======onDestroy");
     }
 }

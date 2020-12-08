@@ -1,32 +1,20 @@
 package com.zcc.frame.activity.ktv;
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.zcc.frame.R;
 import com.zcc.frame.base.BaseActivity;
-import com.zcc.frame.callback.StateCallBack;
 import com.zcc.frame.common.LogManager;
 import com.zcc.frame.tools.Toaster;
 import com.zcc.frame.tools.event.EventCode;
 import com.zcc.frame.tools.event.MessageEvent;
 import com.zcc.frame.tools.event.annotation.BindEventBus;
-import com.zcc.frame.view.MeasuringListview;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,18 +23,20 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+
 @BindEventBus
 public class VideoListActivity extends BaseActivity {
 
-    @InjectView(R.id.lv_video)
+    @Bind(R.id.lv_video)
     RecyclerView lvVideo;
     private List<String> data;
     private MyAdapter adapter;
     private LinearLayoutManager mLayoutManager;
     int playPosition = 0;
     VideoPlayerIJK play;
+
     @Override
     public void onClick(View v) {
 
@@ -55,7 +45,7 @@ public class VideoListActivity extends BaseActivity {
     @Override
     public void bindLayout() {
         setContentView(R.layout.activity_video_list);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override
@@ -78,7 +68,7 @@ public class VideoListActivity extends BaseActivity {
 
     @Override
     public void doBusiness() {
-        EventBus.getDefault().post(new MessageEvent(1,"succeed"));
+        EventBus.getDefault().post(new MessageEvent(1, "succeed"));
 //        lvVideo.addOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
 //            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -205,10 +195,11 @@ public class VideoListActivity extends BaseActivity {
             }
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageReceived(MessageEvent event) {
-        if (event != null&&event.getCode()== EventCode.loginSucceed) {
-            Toaster.show("onMessageReceived======"+event.getData());
+        if (event != null && event.getCode() == EventCode.loginSucceed) {
+            Toaster.show("onMessageReceived======" + event.getData());
             LogManager.e("onMessageReceived======+event.getData()");
         }
     }

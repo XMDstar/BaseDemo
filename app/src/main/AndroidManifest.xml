@@ -9,29 +9,28 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".image.LoaderActivity">
+        <activity android:name=".activity.BannerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".image.ImageTestActivity"></activity>
-        <activity
-            android:name=".activity.ToolAttributeActivity"
-            android:configChanges="orientation|screenSize" />
+        <activity android:name=".image.LoaderActivity" />
+        <activity android:name=".image.ImageTestActivity" />
         <activity android:name=".activity.RxjavaRetrofitActivity" />
-        <activity android:name=".activity.SmartRefreshActivity" />
+        <activity android:name=".activity.SmartRefreshActivity"></activity>
         <activity android:name=".activity.ScrollActivity" />
         <activity android:name=".activity.ImageWXActivity" /> <!-- <meta-data android:name="com.android.support:design" android:value="25.3.1"/> -->
-        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleInstance" />
         <activity android:name=".activity.ConstraintLayoutActivity" />
         <activity android:name=".activity.ktv.ChooseActivity" /> <!-- <activity android:name=".activity.ktv.KtvActivity" /> -->
         <activity android:name=".activity.mvp.view.LoginActivity" />
         <activity android:name=".activity.material_design.MDtestActivity" />
         <activity android:name=".activity.ktv.VideoListActivity" />
         <activity android:name=".activity.ktv.PlayVideoActivity" />
-        <activity android:name=".activity.ImageLoaderTestActivity" />
         <activity
             android:name=".album.TimeAlbumActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -44,13 +43,13 @@
         <service android:name=".service.TestService" />
     </application>
 
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permisssion.CAMERA" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
 </manifest>

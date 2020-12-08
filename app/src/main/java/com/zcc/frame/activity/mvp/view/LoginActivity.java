@@ -11,19 +11,19 @@ import com.zcc.frame.R;
 import com.zcc.frame.activity.MainActivity;
 import com.zcc.frame.activity.mvp.presenter.LoginPresenterCompl;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
 public class LoginActivity extends FragmentActivity implements ILoginView {
 
-    @InjectView(R.id.button_login)
+    @Bind(R.id.button_login)
     Button buttonLogin;
-    @InjectView(R.id.button_clear)
+    @Bind(R.id.button_clear)
     Button buttonClear;
-    @InjectView(R.id.et_name)
+    @Bind(R.id.et_name)
     EditText etName;
-    @InjectView(R.id.et_password)
+    @Bind(R.id.et_password)
     EditText etPassword;
     private LoginPresenterCompl compl;
 
@@ -31,7 +31,7 @@ public class LoginActivity extends FragmentActivity implements ILoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         compl = new LoginPresenterCompl(this);
         getLifecycle().addObserver(compl);
     }

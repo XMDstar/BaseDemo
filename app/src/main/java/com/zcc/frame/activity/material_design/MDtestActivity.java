@@ -13,8 +13,8 @@ import android.widget.Toast;
 import com.zcc.frame.R;
 import com.zcc.frame.base.BaseActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 /**
  * 此类主要使用Material Design中CoordinatorLayout，FloatingActionButton、TextInputEditText、Snackbar、TextInputLayout
@@ -23,15 +23,15 @@ import butterknife.InjectView;
 public class MDtestActivity extends BaseActivity {
 
 
-    @InjectView(R.id.et_name)
+    @Bind(R.id.et_name)
     EditText etName;
-    @InjectView(R.id.text_layout)
+    @Bind(R.id.text_layout)
     TextInputLayout textLayout;
-    @InjectView(R.id.et_password)
+    @Bind(R.id.et_password)
     TextInputEditText etPassword;
-    @InjectView(R.id.fab_button)
+    @Bind(R.id.fab_button)
     FloatingActionButton fabButton;
-    @InjectView(R.id.coordinator_layout)
+    @Bind(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
 
     @Override
@@ -55,7 +55,7 @@ public class MDtestActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @Override
@@ -71,7 +71,6 @@ public class MDtestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 }
